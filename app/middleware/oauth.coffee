@@ -6,9 +6,6 @@ module.exports = (app, events, config) ->
   # helpers
   # ----------------------------------------------------------------------------------------------------
 
-  routes = {}
-  routes[route] = "/session/#{route}" for route in ["connect", "callback", "disconnect", "disconnected"]
-  
   consumerUrl = -> consumer.url.replace "{port}", app.address().port
 
   store = (req, key, value) ->
@@ -71,26 +68,26 @@ module.exports = (app, events, config) ->
   # routes
   # ----------------------------------------------------------------------------------------------------
 
-  app.get routes.connect, (req, res) ->
+  app.get consumer.routes.connect, (req, res) ->
     store req, "host", provider.url
     hash = require("crypto").createHash
     store req, "state", hash("md5").update(Date.now().toString()).digest("hex")
     url = new Url provider.url, provider.authorize,
       response_type: "code"
       client_id: consumer.id
-      redirect_uri: "#{consumerUrl()}#{routes.callback}"
+      redirect_uri: "#{consumerUrl()}#{consumer.routes.connected}"
       scope: consumer.scope
       state: store req, "state"
     redirect "CONNECT", res, url
 
-  app.get routes.callback, (req, res) ->
+  app.get consumer.routes.connected, (req, res) ->
     code = req.query.code
     if code
       store req, "code", code
       url = new Url provider.url, provider.accessToken,
         grant_type: "authorization_code"
         code: code
-        redirect_uri: "#{consumerUrl()}#{routes.callback}"
+        redirect_uri: "#{consumerUrl()}#{consumer.routes.connected}"
         client_id: consumer.id
         client_secret: consumer.secret
       done = (json) ->
@@ -98,21 +95,21 @@ module.exports = (app, events, config) ->
         events.connected req, res
       fail = (err) ->
         console.error err.stack
-        events.error "Failed to connect to OAuth provider during callback: #{err}", req, res
+        events.error "Failed to connect to OAuth provider during connected callback: #{err}", req, res
       get "CONNECT", url, done, fail
     else if req.query.error
       store req, "state", null
       events.denied req.query.error, req, res
     else
-      events.error "Invalid callback request: OAuth2 code not specified", req, res
+      events.error "Invalid connected callback request: OAuth2 code not specified", req, res
 
-  app.get routes.disconnect, (req, res) ->
+  app.get consumer.routes.disconnect, (req, res) ->
     req.session.destroy()
     # @todo get return address from server config
-    url = new Url provider.url, provider.logout, redirect_uri: "#{consumerUrl()}#{routes.disconnected}"
+    url = new Url provider.url, provider.logout, redirect_uri: "#{consumerUrl()}#{consumer.routes.disconnected}"
     redirect "DISCONNECT", res, url
 
-  app.get routes.disconnected, (req, res) ->
+  app.get consumer.routes.disconnected, (req, res) ->
     events.disconnected req, res
   
   # ----------------------------------------------------------------------------------------------------

@@ -30,7 +30,7 @@ app.dynamicHelpers
   user: (req, res) -> req.session.user
   messages: require "express-messages-bootstrap"
 
-app.get "/", require "../app/controllers/home"
+require("../config/routes")(app)
 
 app.listen (process.argv?.length and parseInt process.argv[2]) or 3001
 console.log "Listening on port #{app.address().port} in #{app.settings.env} mode"
