@@ -1,5 +1,4 @@
 npm-debug.log
 config/env.coffee
-config/oauth.coffee
 node_modules
 ISSUES
