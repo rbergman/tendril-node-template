@@ -2,7 +2,7 @@
 
 This sample application is provided to kickstart app development with the [Tendril Connect HTTP APIs](https://dev.tendrilinc.com/docs).  It provides a barebones [Node.js](http://nodejs.org)/[Express](http://expressjs.com) application with working OAuth2 client support baked-in to make you productive writing apps with our APIs as quickly as possible.  It also provides optional support for easy deployment to [Heroku](http://www.heroku.com).
 
-This simple app is developed using [Coffee Script](http://coffeescript.org) but as a Node app you can use JavaScript as the language for your controllers (or other code) as well, at your discretion, with no additional configuration.  The simple example client SDK can be used from JavaScript seamlessly, despite being developed in Coffee Script, so use the language that most appeals to you.  Jade was also chosen for view templating as the default option in Express, but reconfiguring the app to use another templating language is a simple exercise.  See the [Express Guide](http://expressjs.com/guide.html) for more information.
+This app is developed using [Coffee Script](http://coffeescript.org) but as a Node app you can use JavaScript as the language for your controllers (or other code) as well, at your discretion, with no additional configuration.  The simple example client SDK can be used from JavaScript seamlessly, despite being developed in Coffee Script, so use the language that most appeals to you.  Jade was also chosen for view templating as the default option in Express, but reconfiguring the app to use another templating language is a simple exercise.  See the [Express Guide](http://expressjs.com/guide.html) for more information.
 
 # Installation
 
