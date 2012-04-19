@@ -1,0 +1,6 @@
+- if (user && locals.data)
+  p.lead #{data.title} for #{user.firstName} #{user.lastName}
+  pre= JSON.stringify(data, null, 2)
+
+- else
+  a.btn.btn-large.primary(href="/session/connect") View My Data
