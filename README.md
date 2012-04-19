@@ -6,7 +6,7 @@ This sample application is provided to kickstart app development with the [Tendr
 
 First clone the repo:
 
-	git clone git@github.com:rbergman/tendril-heroku-node.git
+	git clone git@github.com:rbergman/tendril-node-template.git
 
 Then, with [Node.js](http://nodejs.org) v0.6.x:
 
