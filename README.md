@@ -22,7 +22,7 @@ Next:
 
 Edit env.coffee to configure a custom session secret for your app.  This can be any secret pass phrase you deem appropriate.
 
-Then at [Tendril's developer site](https://dev.tendrilinc.com), create an app to acquire an OAuth2 app id and key.  Further edit oauth.coffee to add your app id and secret.  At this point you should be ready to start the server like so:
+Then at [Tendril's developer site](https://dev.tendrilinc.com), create an app to acquire an OAuth2 app id and key.  Further edit env.coffee to set these values.  At this point you should be ready to start the server like so:
 
 	./server [server port]
 
