@@ -1,6 +1,23 @@
 - if (user && locals.data)
   p.lead #{data.title} for #{user.firstName} #{user.lastName}
-  pre= JSON.stringify(data, null, 2)
-
+  
+  //- pre= JSON.stringify(data, null, 2)
+  link(rel="stylesheet", type="text/css", href="/css/chart.css")
+  script(id="chartData", type="application/json")!= data
+  script(src="/js/flot/jquery.flot.min.js")
+  script(src="/js/flot/jquery.flot.selection.min.js")
+  script(src="/js/flot/jquery.flot.crosshair.min.js")
+  script(src="/js/date/date.js")
+  script(src="/js/chart.js")
+  
+  #charts.row
+    .span9
+      #placeholder
+    .span3
+      #overview
+      #legend
+  
 - else
   a.btn.btn-large.primary(href="/session/connect") View My Data
+
+
