@@ -55,7 +55,7 @@ module.exports =
       query: ["resolution", "from", "to", "max-results"]
       defaults:
         resolution: "HOURLY"
-        from: moment().subtract("weeks", 1).format("MM/DD/YYYY")
+        from: moment().subtract("weeks", 4).format("MM/DD/YYYY")
         to: moment().format("MM/DD/YYYY")
       params: options.params
       auth: req.session.oauth

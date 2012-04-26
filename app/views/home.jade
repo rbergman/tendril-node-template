@@ -1,9 +1,10 @@
 - if (user && locals.data)
-  p.lead #{data.title} for #{user.firstName} #{user.lastName}
+  p.lead #{data.title} Green Button Data
   
-  //- pre= JSON.stringify(data, null, 2)
   link(rel="stylesheet", type="text/css", href="/css/chart.css")
   script(id="chartData", type="application/json")!= data
+  //if lte IE 8
+    script(src="/js/flot/excanvas.js")
   script(src="/js/flot/jquery.flot.min.js")
   script(src="/js/flot/jquery.flot.selection.min.js")
   script(src="/js/flot/jquery.flot.crosshair.min.js")
@@ -13,8 +14,8 @@
   #charts.row
     .span9
       #placeholder
-    .span3
       #overview
+    .span3
       #legend
   
 - else

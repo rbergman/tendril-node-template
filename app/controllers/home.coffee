@@ -6,24 +6,21 @@ module.exports = (req, res) ->
     if err
       req.flash "error", err
     else if data
-      multiplier = data.usageSummary.powerOfTenMultiplier
+      multiplier = data.usageSummary.powerOfTenMultiplier or 3
+      divisor = Math.pow(10,multiplier)
       timestamps= []
       usage= []
       costs= []
-      console.log 'hello', data
       for block in data.intervalBlock.intervalBlocks
-        #console.log block
         for reading in block.intervalReadings
-          console.log reading.timePeriod.start
-          console.log reading.value
-          console.log reading.cost
           timestamps.push reading.timePeriod.start
-          usage.push reading.value
+          usage.push parseFloat(reading.value)/divisor
           costs.push reading.cost
-          data = JSON.stringify
-            chartCosts:costs
-            chartTimestamps:timestamps
-            chartUsage:usage
+      data= JSON.stringify
+        chartCosts:costs
+        chartTimestamps:timestamps
+        chartUsage:usage
+        multiplier:multiplier
 
     res.render "home", {data: data}
     

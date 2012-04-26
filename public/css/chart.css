@@ -1,11 +1,21 @@
 #placeholder {
-  width: 700px;
+  width: 940px;
   height: 466px;
 }
 
+#placeholder .legendLabel {
+  width: 100px;
+}
+
+#placeholder tbody {
+    border: 1px solid #fofofo;
+}
+
 #overview {
-  width: 220px;
-  height: 147px;
+  width: 878px;
+  height: 100px;
+  margin: auto;
+  margin-left: 33px;
   margin-bottom: 20px;
 }
 
